@@ -1,16 +1,17 @@
+"use client";
 import React from "react";
+import type { Tile } from "../model/grid";
 
 type TileProps = {
-  row: number;
-  col: number;
-  onClick?: (row: number, col: number) => void;
+  tile: Tile;
+  onClick?: (tile: Tile) => void;
 };
 
-const Tile: React.FC<TileProps> = ({ row, col, onClick }) => {
+const Tile: React.FC<TileProps> = ({ tile, onClick }) => {
   const handleClick = () => {
-    console.log(`Clicked on tile at position (${row}, ${col})`);
+    console.log(`Clicked on tile at position (${tile.x}, ${tile.y})`);
     if (onClick) {
-      onClick(row, col);
+      onClick(tile);
     }
   };
 
@@ -19,7 +20,7 @@ const Tile: React.FC<TileProps> = ({ row, col, onClick }) => {
       className="border flex items-center justify-center bg-gray-100 cursor-pointer w-10 h-10"
       onClick={handleClick}
     >
-      <span>{"⬅⬆⬇⮕".charAt(Math.floor(Math.random() * 4))}</span>
+      <span>{tile.direction}</span>
     </div>
   );
 };

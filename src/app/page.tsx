@@ -1,3 +1,4 @@
+"use client";
 import Grid from "./components/grid";
 
 export default function Home() {
