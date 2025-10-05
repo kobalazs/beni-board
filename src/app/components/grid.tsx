@@ -1,15 +1,26 @@
 "use client";
-import { getGrid } from "../model/grid";
-import Tile from "./tile";
+import { useState } from "react";
+import { Grid } from "../model/grid";
+import TileComponent from "./tile";
 
-const grid = getGrid(10, 10);
+export default function GridComponent() {
+  const [grid, setGrid] = useState<Grid | undefined>(undefined);
 
-export default function Home() {
+  const start = () => {
+    setGrid(new Grid(10, 10));
+  };
+
   return (
     <div className="grid grid-cols-10 grid-rows-10 gap-0">
-      {grid.map((tile) => (
-        <Tile key={`${tile.x}-${tile.y}`} tile={tile} />
-      ))}
+      {grid ? (
+        grid.tiles.map((tile) => (
+          <TileComponent key={`${tile.x}-${tile.y}`} tile={tile} />
+        ))
+      ) : (
+        <button className="btn btn-blue" onClick={start}>
+          Start
+        </button>
+      )}
     </div>
   );
 }

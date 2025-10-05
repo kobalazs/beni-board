@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
-import type { Tile } from "../model/grid";
+import { Tile } from "../model/tile";
 
 type TileProps = {
   tile: Tile;
   onClick?: (tile: Tile) => void;
 };
 
-const Tile: React.FC<TileProps> = ({ tile, onClick }) => {
+const TileComponent: React.FC<TileProps> = ({ tile, onClick }) => {
   const handleClick = () => {
     console.log(`Clicked on tile at position (${tile.x}, ${tile.y})`);
     if (onClick) {
@@ -25,4 +25,4 @@ const Tile: React.FC<TileProps> = ({ tile, onClick }) => {
   );
 };
 
-export default Tile;
+export default TileComponent;
