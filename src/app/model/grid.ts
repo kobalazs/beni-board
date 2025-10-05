@@ -10,4 +10,8 @@ export class Grid {
       }
     }
   }
+
+  public removeTile(tile: Tile) {
+    tile.direction = undefined;
+  }
 }
