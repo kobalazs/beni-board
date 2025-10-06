@@ -3,6 +3,8 @@ import { Tile } from "./tile";
 
 export class Grid {
   public tiles: Array<Tile> = [];
+  public tool: "default" | "drill" = "default";
+  public drillCount: number = 10;
 
   constructor(public width: number, public height: number) {
     for (let y = 0; y < width; y++) {
@@ -16,7 +18,24 @@ export class Grid {
     return this.tiles.find((tile) => tile.x === x && tile.y === y);
   }
 
-  public removeTile(tile: Tile): void {
+  public clickTile(tile: Tile): void {
+    switch (this.tool) {
+      case "default":
+        this.removeTile(tile);
+        break;
+      case "drill":
+        if (this.drillCount > 0) {
+          tile.status = "removed";
+          this.drillCount--;
+          this.tool = "default";
+        }
+        break;
+      default:
+        throw new Error("Invalid tool");
+    }
+  }
+
+  private removeTile(tile: Tile): void {
     let neighbour = this.getTileNeighbor(tile, tile.direction);
     while (neighbour) {
       if (neighbour.status !== "removed") {

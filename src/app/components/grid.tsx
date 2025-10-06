@@ -1,24 +1,26 @@
 "use client";
-import { useReducer } from "react";
 import { Grid } from "../model/grid";
 import TileComponent from "./tile";
 
 type GridProps = {
   grid: Grid;
+  onChange: () => void;
 };
 
-const GridComponent: React.FC<GridProps> = ({ grid }) => {
-  const [, forceUpdate] = useReducer((x) => x + 1, 0);
-
+const GridComponent: React.FC<GridProps> = ({ grid, onChange }) => {
+  console.log(grid);
   return (
-    <div className="grid grid-cols-10 grid-rows-10 gap-0">
+    <div
+      className={`grid grid-cols-${grid.height} grid-rows-${grid.width} gap-0`}
+    >
       {grid.tiles.map((tile) => (
         <TileComponent
           key={`${tile.x}-${tile.y}`}
           tile={tile}
+          tool={grid.tool}
           onClick={() => {
-            grid.removeTile(tile);
-            forceUpdate();
+            grid.clickTile(tile);
+            onChange();
           }}
         />
       ))}
