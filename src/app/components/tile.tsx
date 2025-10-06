@@ -15,8 +15,8 @@ const TileComponent: React.FC<TileProps> = ({ tile, onClick }) => {
 
   return (
     <div
-      className={`border border-black flex items-center justify-center cursor-pointer w-10 h-10 ${
-        tile.direction ? "bg-gray-100" : "bg-black"
+      className={`border border-black text-black flex items-center justify-center cursor-pointer w-10 h-10 ${
+        tile.status == "active" ? "bg-gray-100" : "bg-black"
       }`}
       onClick={handleClick}
     >
