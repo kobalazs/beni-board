@@ -8,16 +8,14 @@ type GridProps = {
 };
 
 const GridComponent: React.FC<GridProps> = ({ grid, onChange }) => {
-  console.log(grid);
   return (
-    <div
-      className={`grid grid-cols-${grid.height} grid-rows-${grid.width} gap-0`}
-    >
+    <div className={`grid grid-cols-6 grid-rows-6 gap-0`}>
       {grid.tiles.map((tile) => (
         <TileComponent
           key={`${tile.x}-${tile.y}`}
           tile={tile}
           tool={grid.tool}
+          isSelected={tile === grid.moveFrom}
           onClick={() => {
             grid.clickTile(tile);
             onChange();

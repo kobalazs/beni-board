@@ -8,7 +8,7 @@ export default function Home() {
   const [grid, setGrid] = useState<Grid | undefined>(undefined);
 
   const start = () => {
-    setGrid(new Grid(10, 10));
+    setGrid(new Grid(6, 6));
   };
 
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -18,7 +18,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1>Beni Board</h1>
         {grid ? (
-          <div>
+          <div className="select-none">
             <GridComponent grid={grid} onChange={forceUpdate} />
             <ToolboxComponent grid={grid} onChange={forceUpdate} />
           </div>
